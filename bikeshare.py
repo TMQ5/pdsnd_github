@@ -176,7 +176,7 @@ def user_stats(df,city):
     print('-'*40)
 
 def raw_data(df):
-    """Asks user if they want to displays 5 lines of raw data."""
+    """Asks user if they want to displays 5 lines of raw data and keet asking until the user says no"""
     raw_data = input('\nDo you want to see 5 lines of raw data?.\n')
     start_loc = 0
     while raw_data.lower() == 'yes':

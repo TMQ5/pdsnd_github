@@ -7,7 +7,7 @@ Tuesday August 31, 2021
 Post your Work on GitHub
 
 ### Description
-In this project, we'll be simulating a realistic workflow to refactor the previous BikeShare project using Git. Our tasks for this project are set up the repository, improve documentation, refactor code and merge branches.
+In this project, we'll be simulating a realistic workflow to refactor the previous BikeShare project using Git. We have 4 tasks for this project need to be done , these tasks are set up the repository, improve documentation, refactor code and merge branches.
 
 ### Files used
 bikeshare.py

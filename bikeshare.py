@@ -1,7 +1,9 @@
+#import necessary packages
 import time
 import pandas as pd
 import numpy as np
 
+#import the data
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -21,26 +23,26 @@ def get_filters():
         city = input('Which one of these city would you like to explore: (Chicago, New York ,Washington)?').lower()
         if city not in ['chicago', 'new york', 'washington']:
             print('There is no data for this city, please enter the correct city name!')
-         
+
         else:
             break
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    while True:    
+    while True:
         month = input('Which month do you want to explore the ' + city + ' city data: (January,February,March,April,May,June,or all)?').lower()
         if month not in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
             print('There is no data for ' + city + ' in this month, please select one of the months listed!')
-            
+
         else:
             break
-            
+
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
         day = input('Which day of week do you want to explore the ' + city + ' city data: (Saturday,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday, or all)?').lower()
         if day not in ['saturday','sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'all']:
             print('Please write the correct day name!')
- 
+
         else:
             break
 
@@ -61,21 +63,21 @@ def load_data(city, month, day):
     """
     #load cities data into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     #convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
-    #extract month, hour, and day of week from the 'Start Time' to create new columns 
+
+    #extract month, hour, and day of week from the 'Start Time' to create new columns
     df['month'] = df['Start Time'].dt.month
     df['hour'] = df['Start Time'].dt.hour
     df['day_of_week'] = df['Start Time'].dt.day_name()
-    
+
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-       
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -128,7 +130,7 @@ def station_stats(df):
     frequent_combination = df['combination'].mode()[0]
     print("The most frequent combination of start station and end station trip is: {}".format(frequent_combination))
 
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -142,11 +144,11 @@ def trip_duration_stats(df):
     # TO DO: display total travel time
     total_trip = df['Trip Duration'].sum()
     print("The total travel time in seconds is:", total_trip, "and in minutes is:", total_trip/60)
-    
+
     # TO DO: display mean travel time
     trip_avg = df['Trip Duration'].mean()
     print("The average travel time in seconds is:" , trip_avg, "and in minutes is:", trip_avg/60)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -160,13 +162,13 @@ def user_stats(df,city):
     # TO DO: Display counts of user types
     user_types = df['User Type'].value_counts()
     print("The counts of user types is:\n", user_types)
-    
+
     # TO DO: Display counts of gender
     # TO DO: Display earliest, most recent, and most common year of birth
     if city != 'washington':
         gender = df['Gender'].value_counts()
         print("The counts of each gender is:\n", gender)
-        
+
         earliest_year = df['Birth Year'].min()
         recent_year = df['Birth Year'].max()
         common_year = df['Birth Year'].mode()[0]

@@ -96,15 +96,15 @@ def time_stats(df):
     start_time = time.time()
 
     # TO DO: display the most common month
-    common_month = df['month'].mode()[0]
+    common_month = df['month'].value_counts().head(1)
     print("The most common month is:", common_month)
 
     # TO DO: display the most common day of week
-    common_dow = df['day_of_week'].mode()[0]
+    common_dow = df['day_of_week'].value_counts().head(1)
     print("The most common day of week is:", common_dow)
 
     # TO DO: display the most common start hour
-    common_hour = df['hour'].mode()[0]
+    common_hour = df['hour'].value_counts().head(1)
     print("The most common start hour is:", common_hour)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -118,16 +118,16 @@ def station_stats(df):
     start_time = time.time()
 
     # TO DO: display most commonly used start station
-    start_station = df['Start Station'].mode()[0]
+    start_station = df['Start Station'].value_counts().head(1)
     print("The most commonly used start station is: {}".format(start_station))
 
     # TO DO: display most commonly used end station
-    end_station = df['End Station'].mode()[0]
+    end_station = df['End Station'].value_counts().head(1)
     print("The most commonly used end station is: {}".format(end_station))
 
     # TO DO: display most frequent combination of start station and end station trip
     df['combination'] = df['Start Station'] + " " + df['End Station']
-    frequent_combination = df['combination'].mode()[0]
+    frequent_combination = df['combination'].value_counts().head(1)
     print("The most frequent combination of start station and end station trip is: {}".format(frequent_combination))
 
 
@@ -171,14 +171,14 @@ def user_stats(df,city):
 
         earliest_year = df['Birth Year'].min()
         recent_year = df['Birth Year'].max()
-        common_year = df['Birth Year'].mode()[0]
+        common_year = df['Birth Year'].value_counts().head(1)
         print("The earliest year of birth {} \n The most recent year of birth {} \n The most common year of birth {}".format(earliest_year,recent_year,common_year))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def raw_data(df):
-    """Asks user if they want to displays 5 lines of raw data."""
+    """Asks user if they want to displays 5 lines of raw data and keet asking until the user says no"""
     raw_data = input('\nDo you want to see 5 lines of raw data?.\n')
     start_loc = 0
     while raw_data.lower() == 'yes':
